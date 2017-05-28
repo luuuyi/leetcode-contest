@@ -1,2 +1,23 @@
 # leetcode-contest
-leetcode weekly contest
+
+## **介绍**
+每周的[LeetCode](https://leetcode.com/)周练记录。
+
+## **内容**
+### **2017/05/28**
+- [contest34](https://leetcode.com/contest/leetcode-weekly-contest-34) >> contest34
+
+### **2017/05/21**
+- [contest33](https://leetcode.com/contest/leetcode-weekly-contest-33) >> contest33
+
+### **2017/05/14**
+- [contest32](https://leetcode.com/contest/leetcode-weekly-contest-32) >> contest34
+
+### **2017/05/07**
+- [contest31](https://leetcode.com/contest/leetcode-weekly-contest-31) >> contest31
+
+### **2017/04/30**
+- [contest30](https://leetcode.com/contest/leetcode-weekly-contest-30) >> contest30
+
+## **备注**
+相应的解题思路会放在代码里面作为注释注解
