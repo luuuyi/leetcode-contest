@@ -4,6 +4,9 @@
 每周的[LeetCode](https://leetcode.com/)周练记录。
 
 ## **内容**
+### **2017/06/04**
+- [contest35](https://leetcode.com/contest/leetcode-weekly-contest-35) >> contest35
+
 ### **2017/05/28**
 - [contest34](https://leetcode.com/contest/leetcode-weekly-contest-34) >> contest34
 
