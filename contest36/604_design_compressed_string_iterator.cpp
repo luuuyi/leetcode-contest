@@ -2,10 +2,9 @@
 class StringIterator {
 private:
     string _ori;
-    string _process;
-    int _index, _lens;
+    vector<vector<long long>> _table;
 
-    string processString(string &s){
+    void processString(string &s){
         string ret;
         int lens = s.size();
         for(int i=0;i<lens;){
@@ -16,27 +15,35 @@ private:
                     else    break;
                 }
                 int end = i;
-                ret.append(string(stoi(s.substr(start, end-start)), s[start-1]));
+                long long nums = stoi(s.substr(start, end-start));
+                long long index = start - 1;
+                _table.push_back({index, nums});
             }
         }
-        return ret;
     }
 public:
     StringIterator(string compressedString) {
         _ori = compressedString;
-        _process = processString(_ori);
-        _lens = _process.size();
-        _index = 0;
+        processString(_ori);
     }
     
     char next() {
-        if(_index < _lens)  return _process[_index++];
-        else    return ' ';
+        for(int i=0;i<_table.size();i++){
+            if(_table[i][1]>0){
+                _table[i][1]--;
+                return _ori[_table[i][0]];
+            }
+        }
+        return ' ';
     }
     
     bool hasNext() {
-        if(_index < _lens)  return true;
-        else    return false;
+        for(int i=0;i<_table.size();i++){
+            if(_table[i][1]>0){
+                return true;
+            }
+        }
+        return false;
     }
 };
 
