@@ -1,61 +1,36 @@
-#include <time.h>
 class LogSystem {
 private:
-    map<long long, int> _table;
-    map<string, pair<int, string>> _rep;
-    map<string, pair<int, string>> _fck;
-    long long cal(string timestamp){
-        string tmp = timestamp;
-        tmp[4] = '-'; tmp[7] = '-'; tmp[10] = ' ';
-        tm tm_; strptime(tmp.c_str(), "%Y-%m-%d %H:%M:%S", &tm_);
-        tm_.tm_isdst = -1;
-        long long ret = mktime(&tm_);
-        return ret;
-    }
-    map<string, pair<int, string>> init(){
-        return map<string, pair<int, string>>({
-            {"Year", {4, ":12:31:23:59:59"}},
-            {"Month", {7, ":31:23:59:59"}},
-            {"Day", {10, ":23:59:59"}},
-            {"Hour", {13,":59:59"}},
-            {"Minute", {16, ":59"}}
-        });
-    }
-    map<string, pair<int, string>> fuck(){
-        return map<string, pair<int, string>>({
-            {"Year", {4, ":01:01:00:00:00"}},
-            {"Month", {7, ":01:00:00:00"}},
-            {"Day", {10, ":00:00:00"}},
-            {"Hour", {13,":00:00"}},
-            {"Minute", {16, ":00"}}
+    unordered_map<string, int> _table;
+    unordered_map<string, int> _place;
+    unordered_map<string, int> init(){
+        return unordered_map<string, int>({
+            {"Year", 5},
+            {"Month", 8},
+            {"Day", 11},
+            {"Hour", 14},
+            {"Minute", 17},
+            {"Second", 19}
         });
     }
 public:
     LogSystem() {
-        _rep = init();
-        _fck = fuck();
+        _place = init();
     }
     
     void put(int id, string timestamp) {
-        long long res = cal(timestamp);
-        _table[res] = id;
+        _table[timestamp] = id;
     }
     
     vector<int> retrieve(string s, string e, string gra) {
-        long long start = 0;
-        long long end = 0;
-        if(gra.compare("Second") == 0){  end = cal(e); start = cal(s);}
-        else{
-            string tmp = e.substr(0, _rep[gra].first) + _rep[gra].second;
-            end = cal(tmp);
-            tmp = s.substr(0, _fck[gra].first) + _fck[gra].second;
-            start = cal(tmp);
-        }
-        auto k = _table.lower_bound(start);
+        // 根据给定的截止条件，选择有用的字符串段来比较
+        int lens = _place[gra];
+        string start = s.substr(0, lens);
+        string finish = e.substr(0, lens);
         vector<int> ret;
-        for(;k!=_table.end();k++){
-            if(k->first > end)  break;
-            else    ret.push_back(k->second);
+        for(auto k=_table.begin();k!=_table.end();k++){
+            string tmp = k->first.substr(0, lens);
+            // 时间上的对比直接可以用字符串的比较函数来做
+            if(tmp.compare(start) >= 0 && tmp.compare(finish)<=0)  ret.push_back(k->second);
         }
         return ret;
     }
