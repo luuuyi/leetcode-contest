@@ -4,6 +4,10 @@
 每周的[LeetCode](https://leetcode.com/)周练记录。
 
 ## **内容**
+### **2017/07/02**
+- [contest39](https://leetcode.com/contest/leetcode-weekly-contest-39) >> contest39
+- 难度比较高，集中在最后两道题，倒数第二道跟上周的逆序对那道题类似
+
 ### **2017/06/24**
 - [contest38](https://leetcode.com/contest/leetcode-weekly-contest-38) >> contest38
 
